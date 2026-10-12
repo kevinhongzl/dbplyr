@@ -26,7 +26,7 @@ jobs:
 
           - {os: windows-latest, r: 'release'}
           # use 4.0 or 4.1 to check with rtools40's older compiler
-          - {os: windows-latest, r: 'oldrel-4'}
+          - {os: windows-latest, r: 'oldrel-4', extra-packages: 'RSQLite@3.53.2'}
 
           - {os: ubuntu-latest,  r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,  r: 'release'}
@@ -55,6 +55,7 @@ jobs:
           extra-packages: |
             any::rcmdcheck
             odbc=?ignore-before-r=4.3.0
+            ${{ matrix.config.extra-packages }}
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
